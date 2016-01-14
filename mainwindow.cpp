@@ -73,14 +73,24 @@ MainWindow::MainWindow(QWidget *parent) :
          dblock.push_back(true);
      else
          dblock.push_back(false);
-     if(radioactive =="radio")
+     if(radioactive=="radio")
+     {
          radio.push_back(true);
+
+        }
      else
+     {
          radio.push_back(false);
-     if(radioactive =="nonradio")
+         }
+     if(radioactive=="nonradio")
+     {
          nonradio.push_back(true);
+        }
+
      else
+     {
          nonradio.push_back(false);
+        }
       }
 
 
@@ -95,6 +105,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+
     QString metalchoice=ui->comboBox->currentText();
     QString state=ui->comboBox_2->currentText();
     QString block=ui->comboBox_3->currentText();
@@ -139,6 +150,17 @@ void MainWindow::on_pushButton_clicked()
     {
         bc=dblock;
     }
+    if(radiochoice=="RadioActivity")
+    {
+        rc = radio;
+       // ui->listWidget->addItem("radio");
+    }
+    else if(radiochoice=="Non-Radioactivity")
+    {
+        rc=nonradio;
+        //ui->listWidget->addItem("nonradio");
+
+    }
 if(mc.size()!= 0)
 {
     ans=mc;
@@ -155,6 +177,14 @@ if(bc.size()!=0)
    for(int i=0;i<ans.size();i++)
    {
        ans[i]=ans[i]&bc[i];
+   }
+}
+if(rc.size()!=0)
+{
+   for(int i=0;i<ans.size();i++)
+   {
+       ans[i]=ans[i]&rc[i];
+
    }
 }
 for(int i=0;i<ans.size();i++)
@@ -213,9 +243,23 @@ void MainWindow::on_pushButton_2_clicked()
     {
         bc=dblock;
     }
+    if(radiochoice=="RadioActivity")
+    {
+        rc = radio;
+//ui->listWidget_2->addItem("radio");
+    }
+    else if(radiochoice=="Non-Radioactivity")
+    {
+        rc=nonradio;
+
+//ui->listWidget_2->addItem("nonradio");
+    }
+for(int i=0;i<names.size();i++)
+    ans.push_back(false);
 if(mc.size()!= 0)
 {
-    ans=mc;
+    for(int i=0;i<ans.size();i++)
+    ans[i]=ans[i] |mc[i];
 }
 if(sc.size()!=0)
 {
@@ -229,6 +273,13 @@ if(bc.size()!=0)
    for(int i=0;i<ans.size();i++)
    {
        ans[i]=ans[i] | bc[i];
+   }
+}
+if(rc.size()!=0)
+{
+   for(int i=0;i<ans.size();i++)
+   {
+       ans[i]=ans[i]|rc[i];
    }
 }
 for(int i=0;i<ans.size();i++)
